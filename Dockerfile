@@ -98,7 +98,6 @@ COPY iib_manage.sh /usr/local/bin/
 COPY iib-license-check.sh /usr/local/bin/
 COPY iib_env.sh /usr/local/bin/
 COPY login.defs /etc/login.defs
-COPY sqljdbc4.jar /opt/ibm/iib-10.0.0.7/common/classes
 COPY odbc.ini /etc
 COPY odbcinst.ini /etc
 COPY agentx.json /home/iibuser
