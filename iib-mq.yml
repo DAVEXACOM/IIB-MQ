@@ -36,7 +36,7 @@ items:
             value: accept
           - name: MQ_QMGR_NAME
             value: QM1
-          image: registry.ng.bluemix.net/pj_docker_images/iib-mq-pj-1:12
+          image: registry.ng.bluemix.net/iib-mq:2
           imagePullPolicy: IfNotPresent
           name: iibmq1
           ports:
