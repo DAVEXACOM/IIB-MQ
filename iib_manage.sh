@@ -8,8 +8,8 @@
 
 set -e
 
-NODE_NAME=${NODE_NAME-IIBV1007}
-EXEC_NAME=IS1
+NODE_NAME=${NODE_NAME-IIBV10010}
+EXEC_NAME=${IIBSERVERNAME-IS1}
 export JDBC_SERVICE=BROKER
 export HOST_NAME=IIBDOCKER
 
@@ -97,7 +97,7 @@ start()
 {
 	su - iibuser
 	echo "----------------------------------------"
-  /opt/ibm/iib-10.0.0.7/iib version
+  /opt/ibm/iib-10.0.0.10/iib version
 	echo "----------------------------------------"
 
   NODE_EXISTS=`mqsilist | grep $NODE_NAME > /dev/null ; echo $?`
