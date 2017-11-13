@@ -38,7 +38,7 @@ RUN apt-get dist-upgrade -y
 
 #Install MQ
 
-ARG MQ_URL=http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev902_linux_x86-64.tar.gz
+ARG MQ_URL=http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev903_linux_x86-64.tar.gz
 ARG MQ_PACKAGES="MQSeriesRuntime-*.rpm MQSeriesServer-*.rpm MQSeriesMsg*.rpm MQSeriesJava*.rpm MQSeriesJRE*.rpm MQSeriesGSKit*.rpm MQSeriesWeb*.rpm"
 
 RUN mkdir -p /tmp/mq \
@@ -77,9 +77,9 @@ RUN chmod +x /usr/local/bin/*.sh
 
 # Install IIB V10 Developer edition
 RUN mkdir /opt/ibm && \
-    curl http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/integration/10.0.0.7-IIB-LINUX64-DEVELOPER.tar.gz \
-    | tar zx --exclude iib-10.0.0.7/tools --directory /opt/ibm && \
-    /opt/ibm/iib-10.0.0.7/iib make registry global accept license silently
+    curl http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/integration/10.0.0.10-IIB-LINUX64-DEVELOPER.tar.gz \
+    | tar zx --exclude iib-10.0.0.10/tools --directory /opt/ibm && \
+    /opt/ibm/iib-10.0.0.10/iib make registry global accept license silently
 
 # Configure system
 COPY kernel_settings.sh /tmp/
