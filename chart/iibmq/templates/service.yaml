@@ -13,28 +13,26 @@
 # limitations under the License.
 
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
-  name: "{{.Release.Name}}-test"
+  name: {{ template "fullname" . }}
   labels:
     app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
-  annotations:
-    "helm.sh/hook": test-success
 spec:
-  containers:
-    - name: {{.Release.Name}}-test
-      image: alpine:latest
-      env:
-        # Host name for the service running an MQ queue manager
-        - name: MQ_HOST
-          value: {{ template "fullname" . }}
-        # Time to try before giving up and failing the test (in seconds)
-        - name: TIMEOUT
-          value: "10" 
-      command: ["sh"]
-      # Check that port 4414 is listening
-      args: ["-xc", "nc -v -z -w$(TIMEOUT) $(MQ_HOST) 4414"]
-  restartPolicy: Never
+  type: {{ .Values.service.type }}
+  ports:
+  - port: 1414
+    name: {{ .Values.service.name }}-server
+  - port: 9443
+    name: {{ .Values.service.name }}-web
+  - port: 4414
+    name: {{ .Values.service.name }}-console
+  - port: 7080
+    name: {{ .Values.service.name }}-nodelistener
+  - port: 7800
+    name: {{ .Values.service.name }}-serverlistener
+  selector:
+    app: {{ template "fullname" . }}
