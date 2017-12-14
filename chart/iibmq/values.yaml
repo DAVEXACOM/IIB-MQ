@@ -41,7 +41,7 @@ resources:
 # queueManager section specifies settings for the MQ Queue Manager
 queueManager:
   # name allows you to specify the name to use for the queue manager.  Defaults to the Helm release name.
-  name: icpqm1
+  name: icpDA1
   # dev section specifies settings for the MQ developer defaults available in the MQ Advanced for Developers image.
   dev:
     # adminPassword sets the password of the admin user
