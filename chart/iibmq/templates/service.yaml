@@ -27,9 +27,9 @@ spec:
   - port: 1414
     name: {{ .Values.service.name }}-server
   - port: 9443
-    name: {{ .Values.service.name }}-web
-  - port: 4414
     name: {{ .Values.service.name }}-console
+  - port: 4414
+    name: {{ .Values.service.name }}-web
   - port: 7080
     name: {{ .Values.service.name }}-nodelistener
   - port: 7800
