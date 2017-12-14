@@ -1,0 +1,56 @@
+license: "accept"
+
+image:
+  # repository is the container repository to use, which must contain IBM MQ Advanced for Developers
+  repository: icpcluster.icp:8500/default/iib-mq 
+  # tag is the tag to use for the container repository
+  tag: latest
+  # pullSecret is the secret to use when pulling the image from a private registry
+  pullSecret:
+  # pullPolicy is either IfNotPresent or Always (https://kubernetes.io/docs/concepts/containers/images/)
+  pullPolicy: IfNotPresent
+
+# persistence section specifies persistence settings which apply to the whole chart
+persistence:
+  # enabled is whether to use Persistent Volumes or not
+  enabled: false
+  # useDynamicProvisioning is whether or not to use Storage Classes to dynamically create Persistent Volumes
+  useDynamicProvisioning: true
+
+# dataPVC section specifies settings for the main Persistent Volume Claim, which is used for data in /var/mqm
+dataPVC:
+  # name sets part of the name for this Persistent Volume Claim
+  name: "data"
+  ## storageClassName is the name of the Storage Class to use, or an empty string for no Storage Class
+  storageClassName: ""
+  ## size is the minimum size of the Persistent Volume
+  size: 2Gi
+
+service:
+  name: iib-mq
+  type: NodePort
+
+resources:
+  limits:
+    cpu: 1024m
+    memory: 1024Mi
+  requests:
+    cpu: 1024m
+    memory: 1024Mi
+
+# queueManager section specifies settings for the MQ Queue Manager
+queueManager:
+  # name allows you to specify the name to use for the queue manager.  Defaults to the Helm release name.
+  name: icpqm1
+  # dev section specifies settings for the MQ developer defaults available in the MQ Advanced for Developers image.
+  dev:
+    # adminPassword sets the password of the admin user
+    adminPassword: passw0rd
+    # appPassword sets the password of the app user
+    appPassword: passw0rd
+# iib section specifies settings for iib
+iib:
+  iibnodename: icpnode1
+  iibservername: default
+# nameOverride can be set to partially override the name of the resources created by this chart
+nameOverride:
