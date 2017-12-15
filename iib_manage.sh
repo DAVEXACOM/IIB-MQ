@@ -144,7 +144,7 @@ start()
   	mqsistop $NODE_NAME
   	mqsistart $NODE_NAME
   	
-  	
+  	mqsideploy $NODE_NAME -e $EXEC_NAME -a /etc/mqm/ICPDeploy.bar -m
   	
 }
 
