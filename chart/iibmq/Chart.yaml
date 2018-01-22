@@ -9,7 +9,7 @@
 ###############################################################################
 apiVersion: v1
 description: IBM Integration Bus for application integration including IBM MQ for reliable messaging
-name: iib-mq 
+name: iibmq 
 version: 1.1.0
 tillerVersion: ">=2.4.1"
 icon: https://raw.githubusercontent.com/ot4i/iib-helm/master/ibm-integration-bus-dev/IBM_Integration_Bus_Icon.svg?sanitize=true 

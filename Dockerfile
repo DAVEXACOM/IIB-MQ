@@ -1,4 +1,4 @@
-# Â© Copyright IBM Corporation 2015.
+# © Copyright IBM Corporation 2015.
 #
 # All rights reserved. This program and the accompanying materials
 # are made available under the terms of the Eclipse Public License v1.0
@@ -8,6 +8,8 @@
 FROM ubuntu:14.04
 
 MAINTAINER Sam Rogers srogers@uk.ibm.com
+
+#begin here
 
 # Install packages
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -30,7 +32,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     rpm \
     sed \
     tar \
-	util-linux 
+	util-linux
 
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -45,12 +47,10 @@ RUN mkdir -p /tmp/mq \
   	&& cd /tmp/mq \
   	&& curl -LO $MQ_URL \
 	&& tar -zxvf ./*.tar.gz \
-	
 	&& groupadd --gid 1000 mqm \
   	&& useradd --create-home --home-dir /home/mqm --uid 1000 --gid mqm mqm \
   	&& usermod -G mqm root \
 	&& cd /tmp/mq/MQServer \
-	
 	# Accept the MQ license
   	&& ./mqlicense.sh -text_only -accept \
   	# Install MQ using the RPM packages
@@ -64,13 +64,12 @@ RUN mkdir -p /tmp/mq \
 	&& sed -i 's/PASS_MAX_DAYS\t99999/PASS_MAX_DAYS\t90/' /etc/login.defs \
   	&& sed -i 's/PASS_MIN_DAYS\t0/PASS_MIN_DAYS\t1/' /etc/login.defs \
 	&& sed -i 's/password\t\[success=1 default=ignore\]\tpam_unix\.so obscure sha512/password\t[success=1 default=ignore]\tpam_unix.so obscure sha512 minlen=8/' /etc/pam.d/common-password
-	
-	COPY mq-dev-config.sh mq-license-check.sh mq.sh setup-mqm-web.sh setup-var-mqm.sh /usr/local/bin/
-	COPY *.mqsc /etc/mqm/
-	COPY *.bar  /etc/mqm/
-	COPY admin.json /etc/mqm/
 
-	COPY mq-dev-config /etc/mqm/mq-dev-config
+COPY mq-dev-config.sh mq-license-check.sh mq.sh setup-mqm-web.sh setup-var-mqm.sh /usr/local/bin/
+COPY *.mqsc /etc/mqm/
+COPY *.bar  /etc/mqm/
+COPY admin.json /etc/mqm/
+COPY mq-dev-config /etc/mqm/mq-dev-config
 
 RUN chmod +x /usr/local/bin/*.sh
 
