@@ -27,7 +27,7 @@ dataPVC:
   size: 2Gi
 
 service:
-  name: iib-mq
+  name: iibmq
   type: NodePort
 
 resources:
